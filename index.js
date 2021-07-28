@@ -67,7 +67,7 @@ const server = createServer((req, res) => {
   }
 });
 
-const PORT = 8000;
+const PORT = process.env.PORT || 8000;
 console.log(PORT);
 server.listen(PORT, () => {
   console.log(`Server is live at port ${PORT}`);
