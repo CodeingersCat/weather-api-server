@@ -7,7 +7,7 @@ const weather_key = process.env.WEATHER_API_KEY;
 const news_key = process.env.NEWS_API_KEY;
 
 const server = createServer((req, res) => {
-  // res.setHeader("Access-Control-Allow-Origin", "*");
+  res.setHeader("Access-Control-Allow-Origin", "https://codeingerscat.github.io");
   res.setHeader("Content-Type", "application/json");
             
   const getWeatherData = async (city) => {
@@ -69,9 +69,7 @@ const server = createServer((req, res) => {
 
 const PORT = process.env.PORT || 8000;
 console.log(PORT);
-server.on('request', (req, res) => {
-  console.log(req)
-})
+
 server.listen(PORT, () => {
   console.log(`Server is live at port ${PORT}`);
 });
