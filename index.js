@@ -7,23 +7,27 @@ const weather_key = process.env.WEATHER_API_KEY;
 const news_key = process.env.NEWS_API_KEY;
 
 const server = createServer((req, res) => {
-  //res.setHeader("Access-Control-Allow-Origin", your_frontend_origin)
+  res.setHeader("Access-Control-Allow-Origin", "https://codeingerscat.github.io/hows-da-weather/")
   res.setHeader("Content-Type", "application/json");
             
   const getWeatherData = async (city) => {
-    var API =
+    try{
+      var API =
       "https://api.openweathermap.org/data/2.5/weather?q=" +
       city +
       "&units=metric&appid=" +
       weather_key;
 
-    const { data } = await axios.get(API);
+      const { data } = await axios.get(API);
 
-    res.end(JSON.stringify(data));
+      res.end(JSON.stringify(data));
+    }catch(err){
+      console.log("Error: ", err);
+    }
   };
 
   const getForecastData = async () => {
-    var API =
+    try{var API =
       "https://api.openweathermap.org/data/2.5/weather?q=" +
       city +
       "&units=metric&appid=" +
@@ -35,10 +39,13 @@ const server = createServer((req, res) => {
 
     var { data } = await axios.get(forecastAPI);
     res.end(JSON.stringify(data));
+    }catch(err){
+      console.log("Err: ", err)
+    }
   };
 
   const getNewsData = async () => {
-    var API =
+    try{var API =
       "https://contextualwebsearch-websearch-v1.p.rapidapi.com/api/search/NewsSearchAPI?q=climate&pageNumber=1&pageSize=10&autoCorrect=true&fromPublishedDate=null&toPublishedDate=null";
 
     var headers = {
@@ -48,10 +55,14 @@ const server = createServer((req, res) => {
 
     const { data } = await axios.get(API, { headers: headers });
     res.end(JSON.stringify(data));
+  }catch(err){
+    console.log("Err: ", err);
+  }
+
   };
 
   var baseUrl = new URL("https://" + req.headers.host + req.url);
-  console.log(baseUrl);
+  // console.log(baseUrl);
   var city = baseUrl.searchParams.get("q");
   if (baseUrl.pathname === "/weather") {
     console.log("Weather");
