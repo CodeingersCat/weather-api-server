@@ -7,7 +7,7 @@ const weather_key = process.env.WEATHER_API_KEY;
 const news_key = process.env.NEWS_API_KEY;
 
 const server = createServer((req, res) => {
-  res.setHeader("Access-Control-Allow-Origin", "https://codeingerscat.github.io/")
+  res.setHeader("Access-Control-Allow-Origin", "https://codeingerscat.github.io/hows-da-weather")
   res.setHeader("Content-Type", "application/json");
             
   const getWeatherData = async (city) => {
